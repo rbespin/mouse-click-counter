@@ -34,11 +34,11 @@ public interface MouseClickCounterConfig extends Config
 {
 	@ConfigItem(
 		position = 1,
-		keyName = "showHide",
+		keyName = "hide",
 		name = "Hide Overlay",
 		description = "Toggle the display of any click count"
 	)
-	default boolean showHide() { return false; }
+	default boolean hide() { return false; }
 
 	@ConfigItem(
 		position = 2,

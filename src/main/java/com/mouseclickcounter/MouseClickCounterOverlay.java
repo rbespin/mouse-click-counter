@@ -123,7 +123,7 @@ public class MouseClickCounterOverlay extends Overlay
 	{
 		panelComponent.getChildren().clear();
 		panelComponent.setPreferredSize(new Dimension(getSize(graphics)+15,0));
-		if(!config.showHide())
+		if(!config.hide())
 		{
 			if(config.showTotalClick())
 			{
