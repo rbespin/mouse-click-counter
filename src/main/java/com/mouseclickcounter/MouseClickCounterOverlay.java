@@ -23,7 +23,7 @@ public class MouseClickCounterOverlay extends Overlay
 
 	@Inject
 	private MouseClickCounterOverlay(MouseClickCounterConfig config,
-									 MouseClickCounterPlugin plugin)
+		MouseClickCounterPlugin plugin)
 	{
 		setPosition(OverlayPosition.ABOVE_CHATBOX_RIGHT);
 		this.config = config;
