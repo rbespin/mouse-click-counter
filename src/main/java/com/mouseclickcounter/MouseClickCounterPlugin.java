@@ -26,10 +26,15 @@
 package com.mouseclickcounter;
 
 import com.google.inject.Provides;
+import java.io.IOException;
 import javax.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Client;
+import net.runelite.api.GameState;
+import net.runelite.api.events.GameStateChanged;
 import net.runelite.client.config.ConfigManager;
+import net.runelite.client.eventbus.Subscribe;
+import net.runelite.client.events.SessionClose;
 import net.runelite.client.input.MouseManager;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
@@ -69,9 +74,16 @@ public class MouseClickCounterPlugin extends Plugin
 	@Override
 	protected void shutDown() throws Exception
 	{
+		mouseListener.saveMouseClicks();
 		mouseManager.unregisterMouseListener(mouseListener);
 		mouseListener = null;
 		overlayManager.remove(overlay);
+	}
+
+	@Override
+	public void resetConfiguration()
+	{
+		mouseListener.resetMouseClickCounterListener();
 	}
 
 	@Provides
@@ -80,13 +92,33 @@ public class MouseClickCounterPlugin extends Plugin
 		return configManager.getConfig(MouseClickCounterConfig.class);
 	}
 
-	public int getLeftClickCounter() { return mouseListener.getLeftClickCounter(); }
+	@Subscribe
+	public void onGameStateChanged(GameStateChanged event) throws IOException
+	{
+		GameState state = event.getGameState();
+		if(state == GameState.LOGIN_SCREEN || state == GameState.UNKNOWN)
+		{
+			mouseListener.saveMouseClicks();
+		}
+	}
 
-	public int getRightClickCounter() { return mouseListener.getRightClickCounter(); }
+	public int getLeftClickCounter()
+	{
+		return mouseListener.getLeftClickCounter();
+	}
 
-	public int getMiddleClickCounter() { return mouseListener.getMiddleClickCounter(); }
+	public int getRightClickCounter()
+	{
+		return mouseListener.getRightClickCounter();
+	}
 
-	public int getTotalClickCounter() { return mouseListener.getTotalClickCounter(); }
+	public int getMiddleClickCounter()
+	{
+		return mouseListener.getMiddleClickCounter();
+	}
 
-
+	public int getTotalClickCounter()
+	{
+		return mouseListener.getTotalClickCounter();
+	}
 }

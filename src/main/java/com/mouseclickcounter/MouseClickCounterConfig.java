@@ -43,8 +43,8 @@ public interface MouseClickCounterConfig extends Config
 	@ConfigItem(
 		position = 2,
 		keyName = "showTotalClick",
-		name = "Show total click totals",
-		description = "Toggle the display of the total mouse clicks"
+		name = "Show all click totals",
+		description = "Toggle the display of all mouse clicks"
 	)
 	default boolean showTotalClick() { return true; }
 
