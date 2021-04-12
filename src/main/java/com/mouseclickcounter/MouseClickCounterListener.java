@@ -151,9 +151,9 @@ public class MouseClickCounterListener extends MouseAdapter
 		FileWriter writer = new FileWriter(this.CLICK_TOTAL_FILE);
 
 		Integer[] totals = {this.getTotalClickCounter(),
-							this.getLeftClickCounter(),
-							this.getRightClickCounter(),
-							this.getMiddleClickCounter()};
+			this.getLeftClickCounter(),
+			this.getRightClickCounter(),
+			this.getMiddleClickCounter()};
 
 		writer.write(totals[FILE_CLICK_TYPE_INDICES.TOTAL.getValue()] + " ");
 		writer.write(totals[FILE_CLICK_TYPE_INDICES.LEFT.getValue()] + " ");
